@@ -3,33 +3,35 @@
 fetch('https://api.magicthegathering.io/v1/cards')
 	.then(result => result.json())
 	.then((res) => {
-		createCards(res);
+		createCards(res.cards);
 	})
 	.catch(err => console.log(err));
 
 	//Function that creates cards for the web page
 	function createCards(result) {
 		const cardColContainer = document.querySelector('#cards');
-		
-		for (let i = 0; i < result.cards.length; i++) {
+
+		// Iterate through all card items
+		for (let i = 0; i < result.length; i++) {
 			const cardColumn = document.createElement('div');
 			const newCard = document.createElement('div');
 			const cardHeader = document.createElement('h4');
 			const cardImg = document.createElement('img');
 			const cardBtn = document.createElement('a');
-			const cardName = document.createTextNode(result.cards[i].name);
+			const cardName = document.createTextNode(result[i].name);
 
 			// Prepare card header
 			cardHeader.appendChild(cardName);
 			// Prepare card image
-			if (result.cards[i].imageUrl === undefined) {
+			if (result[i].imageUrl === undefined) {
 				cardImg.src = 'https://via.placeholder.com/223x310';
 			} else {
-				cardImg.src = result.cards[i].imageUrl;
+				cardImg.src = result[i].imageUrl;
 			}
+
 			cardImg.style.width = "100%";
 			// Prepare card button
-			cardBtn.href = 'card-specific.html?id=' + result.cards[i].id;
+			cardBtn.href = 'card-specific.html?id=' + result[i].id;
 			cardBtn.className = 'btn btn-success';
 			cardBtn.innerHTML = 'View More';
 			// Append card details to card container
@@ -42,12 +44,26 @@ fetch('https://api.magicthegathering.io/v1/cards')
 			cardColumn.appendChild(newCard);
 			// Append the card to parent container
 			cardColContainer.appendChild(cardColumn);
-
 		}
-
-
-		// console.log(result.cards[0]);
-		// console.log(typeof(result.cards[0].id));
-		// console.log(cardBtn);
-
+		// Event listener for seach button
+		document.querySelector('#searchButton').addEventListener('click', function(e) {
+			searchCards(result);
+		});
 	}
+
+	function searchCards(cards) {
+		const cardColContainer = document.querySelector('#cards');
+		let searchText = document.querySelector('#search').value;
+		let searchPattern = new RegExp(searchText, 'i');
+		// Filter card names based on user input
+		let searchResult = cards.filter(function(cards) {
+			return searchPattern.test(cards.name);
+		});
+		// Delete existing elements in card container
+		cardColContainer.innerHTML = "";
+		// Add search results to cards container
+		createCards(searchResult);
+	}
+
+	
+
