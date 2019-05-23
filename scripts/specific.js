@@ -1,5 +1,15 @@
 function showSpecific(card) {
-	console.log(card.name);
+	const cardImageContainer = document.querySelector("#cardImage");
+	const cardImg = document.createElement('img');
+
+	// Prepare and append card image
+	cardImg.src = card.imageUrl;
+	cardImg.style.width = "100%";
+	cardImageContainer.appendChild(cardImg);
+
+
+	console.log(card);
+
 }
 
 // get URL query string
