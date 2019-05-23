@@ -57,6 +57,7 @@ fetch('https://api.magicthegathering.io/v1/cards')
 		let searchPattern = new RegExp(searchText, 'i');
 		// Filter card names based on user input
 		let searchResult = cards.filter(function(cards) {
+			console.log(searchPattern.test(cards.name));
 			return searchPattern.test(cards.name);
 		});
 		// Delete existing elements in card container
