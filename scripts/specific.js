@@ -1,9 +1,17 @@
+// To do;
+// - Test to see if no query string. If not, display message
+
+
 function showSpecific(card) {
 	const cardImageContainer = document.querySelector("#cardImage");
 	const cardImg = document.createElement('img');
 
 	// Prepare and append card image
-	cardImg.src = card.imageUrl;
+	if (card.imageUrl === undefined) {
+		cardImg.src = 'https://via.placeholder.com/223x310';
+	} else {
+		cardImg.src = card.imageUrl;
+	}
 	cardImg.style.width = "100%";
 	cardImageContainer.appendChild(cardImg);
 
