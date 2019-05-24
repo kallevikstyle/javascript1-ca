@@ -4,7 +4,7 @@ function cardGame(cards) {
 	// Event listener 'enter' key in for search field
 	document.querySelector('#search').addEventListener('keypress', function(e) {
 		if (e.keyCode === 13) {
-			// e.preventDefault();
+			e.preventDefault();
 			searchCards(cards);
 		}
 	});
