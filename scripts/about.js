@@ -10,7 +10,7 @@
 	aboutText.innerHTML = aboutText.innerHTML.replace(replacedWord, newWord);
 
 	// Show and hide content when user clicks the heading
-	moreInfoTrigger.addEventListener('click', function(e) {
+	moreInfoTrigger.addEventListener('click', function() {
 		if (moreInfoContent.style.display === 'block') {
 			moreInfoContent.style.display = 'none';
 		} else {

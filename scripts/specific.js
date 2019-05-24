@@ -27,23 +27,23 @@ function showSpecific(card) {
             	</div>`;
 }
 
-// Check if a query string is present or not
-if (!window.location.search) {
-	// Display error message
-	const cardDetails = document.querySelector('#cardDetails');
-	cardDetails.innerHTML = 'No card is selected. Please <a href="index.html">choose a card</a> to display details';
-	
-} else {	
-	// variable for the id
-	var id = getQueryStringValue("id");
+(function() {
+	// Check if a query string is present or not
+	if (!window.location.search) {
+		// Display error message
+		const cardDetails = document.querySelector('#cardDetails');
+		cardDetails.innerHTML = 'No card is selected. Please <a href="index.html">choose a card</a> to display details';
+		
+	} else {	
+		// variable for the id
+		var id = getQueryStringValue("id");
 
-	// Get card info from API
-	fetch('https://api.magicthegathering.io/v1/cards/' + id)
-		.then(result => result.json())
-		.then((res) => {
-			showSpecific(res.card);
-		})
-		.catch(err => console.log(err));
-}
-
-
+		// Get card info from API
+		fetch('https://api.magicthegathering.io/v1/cards/' + id)
+			.then(result => result.json())
+			.then((res) => {
+				showSpecific(res.card);
+			})
+			.catch(err => console.log(err));
+	}
+})();
