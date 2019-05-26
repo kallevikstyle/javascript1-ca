@@ -1,16 +1,17 @@
 function cardGame(cards) {
 	createCards(cards);
 
+	// Event listener for search field live search
+	document.querySelector('#search').addEventListener('input', function() {
+		searchCards(cards);
+	});
+	
 	// Event listener 'enter' key in for search field
 	document.querySelector('#search').addEventListener('keypress', function(e) {
 		if (e.keyCode === 13) {
 			e.preventDefault();
 			searchCards(cards);
 		}
-	});
-	// Event listener for search field live search
-	document.querySelector('#search').addEventListener('input', function() {
-		searchCards(cards);
 	});
 
 	// Event listener for search button
